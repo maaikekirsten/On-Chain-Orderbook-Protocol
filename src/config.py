@@ -17,3 +17,11 @@ def load_config() -> RuntimeConfig:
         max_retries=int(os.getenv('MAX_RETRIES', '3')),
         debug=os.getenv('DEBUG', '0').lower() in {'1', 'true', 'yes'},
     )
+
+
+def parse_positive_int(raw, fallback: int = 1) -> int:
+    try:
+        val = int(str(raw).strip())
+        return val if val > 0 else fallback
+    except (TypeError, ValueError):
+        return fallback
