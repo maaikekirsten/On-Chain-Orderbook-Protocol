@@ -25,3 +25,8 @@ def parse_positive_int(raw, fallback: int = 1) -> int:
         return val if val > 0 else fallback
     except (TypeError, ValueError):
         return fallback
+
+
+def redact_secret(secret: str, visible: int = 4) -> str:
+    s = str(secret or '')
+    return ('*' * max(4, len(s) - visible)) + s[-visible:] if len(s) > visible else '****'
